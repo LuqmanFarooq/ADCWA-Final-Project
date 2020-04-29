@@ -9,24 +9,21 @@
 <title>ADCWA Final Project</title>
 </head>
 <body>
-<h1>Add New Product</h1>
-<form:form modelAttribute="products">
+<h1>Add New Customer</h1>
+<form:form modelAttribute="customers">
   <table>
     <tr>
-      <td>Product Description:</td>
-      <td><form:input path="pDesc" required="required"></form:input></td>
+      <td>Cust Name:</td>
+      <td><form:input path="cName" required="required"></form:input></td>
     </tr>
-     <tr>
-      <td>Quantity in Stock:</td>
-      <td><form:input path="qtyInStock" type="number" min="1"></form:input></td>
-    </tr>
+     
     <tr>
       <td colspan="2">
         <input type="submit" value="Add"/>
       </td>
     </tr>
-  </table>
-  <table>
+    </table>
+    <table>
     <tr>
     	<td><a href="\">Home</a></td>
 	    <td><a href="/showOrders.html">List Orders</a></td>

@@ -6,11 +6,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>List of Products</title>
+<style>
+ th, .pro {
+  border: 1px solid black;
+}
+</style>
+<title>ADCWA Final Project</title>
 </head>
 <body>
 <h1>List of Products</h1>
-<table>
+<table class="pro">
   <tr>
    <th>Product ID</th>
    <th>Description</th>
@@ -19,14 +24,20 @@
   <tr>
     <c:forEach items="${products}" var="product">
       <tr> 
-        <td>${product.pId}</td>
-        <td>${product.pDesc}</td>
-        <td>${product.qtyInStock}</td>
+        <td class="pro">${product.pId}</td>
+        <td class="pro">${product.pDesc}</td>
+        <td class="pro">${product.qtyInStock}</td>
       </tr>
     </c:forEach>
   </tr>
+  </table>
+  <table>
   <tr>
 	    <td><a href="\">Home</a></td>
+	    <td><a href="/addProduct.html">Add Products</a></td>
+	    <td><a href="/showProducts.html">List Products</a></td>
+	    <td><a href="/showOrders.html">List Orders</a></td>
+	    <td><a href="\">Logout</a></td>
 	  </tr>
 </table>
 </body>

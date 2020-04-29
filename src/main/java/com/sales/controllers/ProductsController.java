@@ -13,7 +13,7 @@ import com.sales.models.Product;
 import com.sales.services.ProductService;
 
 @Controller
-public class MainController {
+public class ProductsController {
 
 	@Autowired
 	ProductService ps;
@@ -26,7 +26,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/addProduct.html" , method = RequestMethod.GET)
-	public String addPersonGet(Model model) {
+	public String addProductGet(Model model) {
 		Product p = new Product();
 		
 		model.addAttribute("products", p);
@@ -34,7 +34,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/addProduct.html" , method = RequestMethod.POST)
-	public String addPersonPost(@ModelAttribute("products") Product p) {
+	public String addProductPost(@ModelAttribute("products") Product p) {
 		ps.saveProduct(p);
 		return "redirect:showProducts.html";
 	}
