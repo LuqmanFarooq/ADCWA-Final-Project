@@ -17,17 +17,17 @@ import com.sales.services.CustomerService;
 
 @Controller
 public class CustomersController {
-
+// variables
 	@Autowired
 	CustomerService cs;
-
+// getting all customers and displaying them on listCustomers page
 	@RequestMapping(value = "/showCustomers.html")
 	public String getCustomers(Model model) {
 		ArrayList<Customer> customers = cs.getAllCustomers();
 		model.addAttribute("customers", customers);
 		return "listCustomers";
 	}
-
+// page to add Customer
 	@RequestMapping(value = "/addCustomer.html", method = RequestMethod.GET)
 	public String addCustomerGet(Model model) {
 		Customer c = new Customer();
@@ -35,7 +35,7 @@ public class CustomersController {
 		model.addAttribute("customers", c);
 		return "addCustomer";
 	}
-
+// post request to submit form data
 	@RequestMapping(value = "/addCustomer.html", method = RequestMethod.POST)
 	public String addCustomerPost(@Valid @ModelAttribute("customers") Customer c, BindingResult result) {
 		if (result.hasErrors()) {

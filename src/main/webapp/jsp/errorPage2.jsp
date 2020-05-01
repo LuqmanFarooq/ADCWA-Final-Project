@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>Error Creating the following order</h1>
-	<h2>Error: Customer: ${orders.cust.cId} and/or Product: ${orders.prod.pId} does not exist
+	<h2>Error: Customer: 4${orders.cust.cId} and/or Product: ${orders.prod.pId} does not exist
 	</h2>
 	<form:form modelAttribute="orders">
 		<table>

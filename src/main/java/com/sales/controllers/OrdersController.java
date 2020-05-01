@@ -25,7 +25,7 @@ import com.sales.services.ProductService;
 @SessionAttributes({ "customersList", "productList", "custo" })
 @Controller
 public class OrdersController {
-
+// variables
 	@Autowired
 	OrderService os;
 
@@ -37,6 +37,7 @@ public class OrdersController {
 
 	private Product prod;
 
+// getting all orders and displaying
 	@RequestMapping(value = "/showOrders.html")
 	public String getOrders(Model model) {
 		ArrayList<Order> orders = os.getAllOrders();
@@ -44,6 +45,7 @@ public class OrdersController {
 		return "listOrders";
 	}
 
+// getting form for datainput
 	@RequestMapping(value = "/newOrder.html", method = RequestMethod.GET)
 	public String addOrderGet(Model model) {
 		// getting customer names and storing in map
@@ -68,13 +70,15 @@ public class OrdersController {
 		return "newOrder";
 	}
 
+// post request to submit form data
 	@RequestMapping(value = "/newOrder.html", method = RequestMethod.POST)
 	public String addOrderPost(@Valid @ModelAttribute("orders") Order o, BindingResult result) {
-
+		// getting product id
 		prod = ps.getOneProduct(o.getProd().getpId());
-
+		// getting quantity in stock
 		long qyiInStk;
 		qyiInStk = o.getProd().getQtyInStock();
+		// if errors validation
 		if (result.hasErrors()) {
 			return "newOrder";
 		} else {
@@ -84,6 +88,7 @@ public class OrdersController {
 
 				return "errorPage";
 			} else {
+				// deducting the quantity after order
 				prod.setQtyInStock(prod.getQtyInStock() - (o.getQty()));
 				os.saveOrder(o);
 
