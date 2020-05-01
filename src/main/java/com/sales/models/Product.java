@@ -10,26 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="PRODUCTS")
+@Table(name = "PRODUCTS")
 public class Product {
 	@Id
 	@GeneratedValue
-	@Column(name="PID")
+	@Column(name = "PID")
 	private Long pId;
-	
-	@Column(name="PDESC")
-	@NotBlank
+
+	@Column(name = "PDESC")
+	@NotBlank(message = "may not be empty")
 	private String pDesc;
-	
-	@Column(name="QTYINSTOCK")
-	@Min(value=0)
+
+	@Column(name = "QTYINSTOCK")
+	@Min(value = 0, message = "must be greater than or equal to 0")
 	private int qtyInStock;
-	
-	@OneToMany(mappedBy="prod")
+
+	@OneToMany(mappedBy = "prod")
 	private List<Order> ordersForProduct = new ArrayList<Order>();
 
 	public Long getpId() {

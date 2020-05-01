@@ -43,10 +43,10 @@ th, .pro {
 	<table>
 		<tr>
 			<td><a href="\">Home</a></td>
-			<td><a href="/addOrder.html">Add Order</a></td>
+			<td><a href="/newOrder.html">Add Order</a></td>
 			<td><a href="/showProducts.html">List Products</a></td>
 			<td><a href="/showCustomers.html">List Customers</a></td>
-			<td><a href="\">Logout</a></td>
+			<td><a href="/logout">Logout</a></td>
 		</tr>
 	</table>
 </body>

@@ -14,11 +14,13 @@
   <table>
     <tr>
       <td>Product Description:</td>
-      <td><form:input path="pDesc" required="required"></form:input></td>
+      <td><form:input path="pDesc" ></form:input></td>
+      <td><form:errors path="pDesc" ></form:errors></td>
     </tr>
      <tr>
       <td>Quantity in Stock:</td>
-      <td><form:input path="qtyInStock" type="number" min="1"></form:input></td>
+      <td><form:input path="qtyInStock" ></form:input></td>
+      <td><form:errors path="qtyInStock" ></form:errors></td>
     </tr>
     <tr>
       <td colspan="2">

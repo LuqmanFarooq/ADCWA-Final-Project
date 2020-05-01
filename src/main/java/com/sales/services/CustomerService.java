@@ -8,18 +8,21 @@ import org.springframework.stereotype.Service;
 import com.sales.models.Customer;
 import com.sales.repositories.CustomerRepository;
 
-
 @Service
 public class CustomerService {
 
 	@Autowired
 	CustomerRepository cr;
-	public ArrayList<Customer> getAllCustomers()
-	{
+
+	public ArrayList<Customer> getAllCustomers() {
 		return (ArrayList<Customer>) cr.findAll();
 	}
-	public void saveCustomer(Customer c) 
-	{
+
+	public void saveCustomer(Customer c) {
 		cr.save(c);
+	}
+
+	public Customer getOneCustomer(long id) {
+		return cr.findOne(id);
 	}
 }

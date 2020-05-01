@@ -22,7 +22,8 @@
     </tr>
     <tr>
       <td>Quantity:</td>
-      <td><form:input path="qty" type="number" min="1"></form:input></td>
+      <td><form:input path="qty" ></form:input></td>
+      <td><form:errors path="qty"></form:errors></td>
     </tr>
     <tr>
       <td colspan="2">
@@ -33,7 +34,7 @@
     <table>
     <tr>
     	<td><a href="\">Home</a></td>
-	    <td><a href="/showOrders.html">List Orders</a></td>
+	    <td><a href="/showCustomers.html">List Customers</a></td>
 	    <td><a href="/showProducts.html">List Products</a></td>
 	  </tr>
   </table>

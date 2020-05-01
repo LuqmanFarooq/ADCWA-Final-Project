@@ -8,10 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="ORDERS")
@@ -21,7 +17,7 @@ public class Order {
 	@Column(name="OID")
 	private Long oId;
 	
-	@Min(1)
+	@Min(value=1,message = "must be greater than or equal to 1")
 	@Column(name="QTY")
 	private int qty;
 	

@@ -1,16 +1,19 @@
 package com.sales.controllers;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sales.models.Customer;
 import com.sales.models.Order;
@@ -19,6 +22,7 @@ import com.sales.services.CustomerService;
 import com.sales.services.OrderService;
 import com.sales.services.ProductService;
 
+@SessionAttributes({ "customersList", "productList", "custo" })
 @Controller
 public class OrdersController {
 
@@ -30,6 +34,8 @@ public class OrdersController {
 
 	@Autowired
 	ProductService ps;
+
+	private Product prod;
 
 	@RequestMapping(value = "/showOrders.html")
 	public String getOrders(Model model) {
@@ -55,17 +61,36 @@ public class OrdersController {
 			productList.put(c.getpId(), c.getpDesc());
 		}
 		model.addAttribute("productList", productList);
-		
+
 		Order o = new Order();
-		
+
 		model.addAttribute("orders", o);
 		return "newOrder";
 	}
 
 	@RequestMapping(value = "/newOrder.html", method = RequestMethod.POST)
-	public String addOrderPost(@ModelAttribute("orders") Order o) {
-		os.saveOrder(o);
+	public String addOrderPost(@Valid @ModelAttribute("orders") Order o, BindingResult result) {
+
+		prod = ps.getOneProduct(o.getProd().getpId());
+
+		long qyiInStk;
+		qyiInStk = o.getProd().getQtyInStock();
+		if (result.hasErrors()) {
+			return "newOrder";
+		} else {
+			if (o.getCust() == null) {
+				return "errorPage2";
+			} else if (o.getQty() > qyiInStk) {
+
+				return "errorPage";
+			} else {
+				prod.setQtyInStock(prod.getQtyInStock() - (o.getQty()));
+				os.saveOrder(o);
+
+			}
+		}
 		return "redirect:showOrders.html";
+
 	}
 
 }

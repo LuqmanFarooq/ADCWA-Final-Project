@@ -2,9 +2,12 @@ package com.sales.controllers;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,26 +20,31 @@ public class ProductsController {
 
 	@Autowired
 	ProductService ps;
-	
+
 	@RequestMapping(value = "/showProducts.html")
 	public String getProducts(Model model) {
-		ArrayList<Product> products =  ps.getAllProducts();
+		ArrayList<Product> products = ps.getAllProducts();
 		model.addAttribute("products", products);
 		return "listProducts";
 	}
-	
-	@RequestMapping(value = "/addProduct.html" , method = RequestMethod.GET)
+
+	@RequestMapping(value = "/addProduct.html", method = RequestMethod.GET)
 	public String addProductGet(Model model) {
 		Product p = new Product();
-		
+
 		model.addAttribute("products", p);
 		return "addProduct";
 	}
-	
-	@RequestMapping(value = "/addProduct.html" , method = RequestMethod.POST)
-	public String addProductPost(@ModelAttribute("products") Product p) {
-		ps.saveProduct(p);
-		return "redirect:showProducts.html";
+
+	@RequestMapping(value = "/addProduct.html", method = RequestMethod.POST)
+	public String addProductPost(@Valid @ModelAttribute("products") Product p, BindingResult result) {
+		if (result.hasErrors()) {
+			return "addProduct";
+		} else {
+			ps.saveProduct(p);
+			return "redirect:showProducts.html";
+		}
+
 	}
-	
+
 }

@@ -13,18 +13,18 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name="CUSTOMERS")
+@Table(name = "CUSTOMERS")
 public class Customer {
 	@Id
 	@GeneratedValue
-	@Column(name="CID")
+	@Column(name = "CID")
 	private Long cId;
 
-	@Column(name="CNAME")
-	@NotBlank
+	@Column(name = "CNAME")
+	@NotBlank(message = "may not be empty")
 	private String cName;
-	
-	@OneToMany(mappedBy="cust")
+
+	@OneToMany(mappedBy = "cust")
 	private List<Order> orders = new ArrayList<Order>();
 
 	public Long getcId() {
@@ -49,5 +49,5 @@ public class Customer {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
-	}	
+	}
 }

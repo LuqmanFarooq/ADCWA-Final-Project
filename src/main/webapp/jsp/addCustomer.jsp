@@ -14,7 +14,8 @@
   <table>
     <tr>
       <td>Cust Name:</td>
-      <td><form:input path="cName" required="required"></form:input></td>
+      <td><form:input path="cName"></form:input></td>
+      <td><form:errors path="cName"></form:errors></td>
     </tr>
      
     <tr>
